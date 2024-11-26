@@ -3,8 +3,13 @@ from circleshape import *
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 
 class Player(CircleShape):
+    containers = ()  # Define containers at the class level
+
     def __init__(self, x, y):
-        CircleShape.__init__(self, x, y, PLAYER_RADIUS)
+        # Initialize CircleShape with necessary parameters
+        super().__init__(x, y, PLAYER_RADIUS)
+        # Add instance to any groups stored in the class-level containers
+        self.add(*Player.containers)
         self.rotation = 0
 
     # in the player class
