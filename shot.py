@@ -23,6 +23,10 @@ class Shot(CircleShape):
         if self.position.y < 0 or self.position.y > SCREEN_HEIGHT:
             return True
         return False
+    
+    def collision_check(self, other):
+        distance = (self.position - other.position).length()
+        return distance < (self.radius + other.radius)
 
 
     

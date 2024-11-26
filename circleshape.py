@@ -31,3 +31,6 @@ class CircleShape(pygame.sprite.Sprite):
             return True
         else:
          return False
+        
+    def off_screen(self):
+        pass

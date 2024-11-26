@@ -36,6 +36,7 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     player.shoot()
+                    
             
         for sprite in updatable:
             sprite.update(dt)
@@ -44,6 +45,11 @@ def main():
             if player.collision_check(asteroid) == True:
                 print("Game Over!")
                 return
+            for shot in shots:
+                if shot.collision_check(asteroid) == True:
+                    print("Hit!")
+                    shot.kill()
+                    asteroid.split()
 
             
         screen.fill("black")
