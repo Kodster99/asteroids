@@ -27,6 +27,7 @@ class Shot(CircleShape):
     def collision_check(self, other):
         distance = (self.position - other.position).length()
         return distance < (self.radius + other.radius)
+        
 
 
     

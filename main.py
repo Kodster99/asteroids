@@ -10,7 +10,12 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    #Player score
+    player_score = 0
 
+   #Load background
+    background_img = pygame.image.load("./assets/newbackground.png")
+   
     # Create the groups first
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -26,6 +31,17 @@ def main():
     # Create the Player object
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     asteroid_field = AsteroidField() 
+
+    
+
+    #Create score font
+    score_font = pygame.font.Font('freesansbold.ttf', 32)
+    fontX = 10
+    fontY = 10
+
+    def display_score(x, y):
+        score_img = score_font.render(f"Total Score: {str(player_score)}", True, [255, 255, 255])
+        screen.blit(score_img, (x, y))
     
     while True:
         
@@ -47,17 +63,24 @@ def main():
                 return
             for shot in shots:
                 if shot.collision_check(asteroid) == True:
-                    print("Hit!")
                     shot.kill()
                     asteroid.split()
+                    player_score += 1
 
             
         screen.fill("black")
+        screen.blit(background_img, (0, 0))
         # Draw player
+        display_score(fontX, fontY)
         for sprite in drawable:
             sprite.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
+
+        #display score
+        
+
+
         
 
     '''print("Starting asteroids!")
